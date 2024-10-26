@@ -4,6 +4,8 @@
 
 ## Lab
 
+### （一）嘗試一下 Pod
+
 1. 部署 Nginx Pod。
 
 ```
@@ -78,6 +80,10 @@ $ kubectl get po nginx -o wide
 NAME    READY   STATUS      RESTARTS   AGE   IP       NODE                                               NOMINATED NODE   READINESS GATES
 nginx   0/1     Running   0          17s   <none>   ip-10-66-148-166.ap-southeast-1.compute.internal   <none>           <none>
 ```
+
+### （二）增加一個 container
+
+* 可以用 docker compose 類比
 
 ## 參考
 
