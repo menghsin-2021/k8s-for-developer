@@ -85,6 +85,6 @@ nginx   0/1     Running   0          17s   <none>   ip-10-66-148-166.ap-southeas
 
 * 可以用 docker compose 類比
 
-## 參考
+## References
 
 1. https://kubernetes.io/docs/concepts/workloads/pods/#using-pods
