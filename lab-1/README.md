@@ -85,6 +85,8 @@ nginx   0/1     Running   0          17s   <none>   ip-10-66-148-166.ap-southeas
 
 * 可以用 docker compose 類比
 
+<!-- TODO: 突然想不到有什麼好的 docker entrypoint 可以在 k8s command 踩雷的 lab -->
+
 ## References
 
 1. https://kubernetes.io/docs/concepts/workloads/pods/#using-pods
