@@ -8,14 +8,14 @@
 
 1. 部署 Nginx Pod。
 
-```
-$ kubectl apply -f ./simple-pod.yaml
+```bash
+$ kubectl apply -f ./my-first-pod.yaml
 pod/nginx created
 ```
 
 2. 來看一下 Pod 有哪些資訊
 
-```
+```bash
 $ kubectl get po nginx
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          16m
@@ -27,8 +27,8 @@ $ kubectl describe po nginx
 
 3. 增加一下 `spec.nodeName` 指定 node。
 
-```
-$ cat simple-pod.yaml
+```yaml
+$ cat my-first-pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -44,8 +44,8 @@ spec:
 
 4. `kubectl apply` 遇到這個錯誤是代表什麼意思？
 
-```
-$ kubectl apply -f ./simple-pod.yaml
+```bash
+$ kubectl apply -f ./my-first-pod.yaml
 The Pod "nginx" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
   core.PodSpec{
   	... // 9 identical fields
@@ -65,15 +65,15 @@ The Pod "nginx" is invalid: spec: Forbidden: pod updates may not change fields o
 
 5. 刪除 Pod `nginx`。
 
-```
+```bash
 $ kubectl delete po nginx --grace-period 0
 pod "nginx" deleted
 ```
 
 6. 驗證 Pod 是否部署
 
-```
-$ kubectl apply -f ./simple-pod.yaml
+```bash
+$ kubectl apply -f ./my-first-pod.yaml
 pod/nginx created
 
 $ kubectl get po nginx -o wide
@@ -83,9 +83,36 @@ nginx   0/1     Running   0          17s   <none>   ip-10-66-148-166.ap-southeas
 
 ### （二）增加一個 container
 
-* 可以用 docker compose 類比
+1. 檢視 [docker-compose.yaml](./docker-compose.yaml) 檔案。
 
-<!-- TODO: 突然想不到有什麼好的 docker entrypoint 可以在 k8s command 踩雷的 lab -->
+```bash
+$ cat ./docker-compose.yaml
+services:
+  nginx:
+    image: "nginx:1.26.2"
+    ports:
+      - "8080:80"
+  ubuntu:
+    image: "ubuntu:24.04"
+    entrypoint: "sleep"
+    command: "3600"
+```
+
+2. 參考上述 [docker-compose.yaml](./docker-compose.yaml)，增加一個 ubuntu container 也是分成類似 entrypoint/command 寫法。
+
+```bash
+$ cat ./my-first-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-first-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+```
 
 ## References
 
