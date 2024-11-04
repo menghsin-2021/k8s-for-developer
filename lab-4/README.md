@@ -22,22 +22,22 @@ configmap/nginx-conf created
 
 ## Secret
 
-
 1. 使用 kubectl 命令建立 secret `backend-user`。
 
-```
+```bash
 $ kubectl create secret generic backend-user --from-literal=backend-username='backend-admin'
 ```
 
-2. Attach 至 Pod
+2. 請參考 [Secrets | Kubernetes](https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-environment-variables) 文件關聯 secret `backend-user` 為環境變數 `$SECRET_USERNAME`。
+3. 用 kubectl 進入至 Pod
 
-```
+```bash
 $ kubectl exec -it nginx-deployment-5b55bc6455-g6tcm -- bash
 ```
 
-3. 使用 `env` 印出環境變數 `$SECRET_USERNAME`，或使用 echo 印出環境變數 `$SECRET_USERNAME`
+4. 使用 `env` 印出環境變數 `$SECRET_USERNAME`，或使用 echo 印出環境變數 `$SECRET_USERNAME`
 
-```
+```bash
 root@nginx-deployment-5b55bc6455-g6tcm:/# env | grep "SECRET_USERNAME"
 SECRET_USERNAME=backend-admin
 
