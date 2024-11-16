@@ -18,11 +18,11 @@
 
 4. 開啟 CloudShell 服務。
 
-![](./img/04-cloudshell.png）
+![](./img/04-cloudshell.png)
 
 5. 使用以下 `aws sts get-caller-identity` 服務確認回傳 user name 為表單登記 user。
 
-![](./img/05-cloudshell-aws-sts.png）
+![](./img/05-cloudshell-aws-sts.png)
 
 ```bash
 [cloudshell-user@ip-10-132-90-34 ~]$ aws sts get-caller-identity
