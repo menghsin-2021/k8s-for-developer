@@ -4,28 +4,28 @@
 
 ## Lab
 
-### （一）嘗試一下 Pod
+### （一）嘗試部署 Pod
 
 1. 部署 Nginx Pod。
 
 ```bash
 $ kubectl apply -f ./my-first-pod.yaml
-pod/nginx created
+pod/my-first-pod created
 ```
 
-2. 來看一下 Pod 有哪些資訊
+2. 觀察 Pod 有哪些資訊
 
 ```bash
-$ kubectl get po nginx
+$ kubectl get pod my-first-pod
 NAME    READY   STATUS    RESTARTS   AGE
-nginx   1/1     Running   0          16m
+my-first-pod   1/1     Running   0          16m
 
-$ kubectl get po nginx -o yaml
+$ kubectl get pod my-first-pod -o yaml
 
-$ kubectl describe po nginx
+$ kubectl describe pod my-first-pod
 ```
 
-3. 增加一下 `spec.nodeName` 指定 node。
+1. 使用文字編輯器（nano or vim）增加 `spec.nodeName` 欄位指定 node。
 
 ```yaml
 $ cat my-first-pod.yaml
@@ -34,7 +34,7 @@ kind: Pod
 metadata:
   name: nginx
 spec:
-  nodeName: ip-10-66-148-166.ap-southeast-1.compute.internal
+  nodeName: ip-10-66-148-166.ap-southeast-1.compute.internal --> 增加這一行，請使用 kubectl get node 取得目前 cluster 有的 node 名稱。
   containers:
   - name: nginx
     image: nginx:1.14.2
@@ -45,38 +45,38 @@ spec:
 4. `kubectl apply` 遇到這個錯誤是代表什麼意思？
 
 ```bash
-$ kubectl apply -f ./my-first-pod.yaml
-The Pod "nginx" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
-  core.PodSpec{
-  	... // 9 identical fields
-  	ServiceAccountName:           "default",
-  	AutomountServiceAccountToken: nil,
-  	NodeName: strings.Join({
-  		"ip-10-66-1",
-- 		"22-24",
-+ 		"48-166",
-  		".ap-southeast-1.compute.internal",
-  	}, ""),
-  	SecurityContext:  &{},
-  	ImagePullSecrets: nil,
-  	... // 19 identical fields
-  }
+$ kubectl apply -f my-first-pod.yaml
+The Pod "my-first-pod" is invalid: spec: Forbidden: pod updates may not change fields other than `spec.containers[*].image`,`spec.initContainers[*].image`,`spec.activeDeadlineSeconds`,`spec.tolerations` (only additions to existing tolerations),`spec.terminationGracePeriodSeconds` (allow it to be set to 1 if it was previously negative)
+  core.PodSpec{
+  	... // 9 identical fields
+  	ServiceAccountName:           "default",
+  	AutomountServiceAccountToken: nil,
+  	NodeName: strings.Join({
+  		"ip-10-66-1",
+- 		"9-182",
++ 		"48-166",
+  		".ap-southeast-1.compute.internal",
+  	}, ""),
+  	SecurityContext:  &{},
+  	ImagePullSecrets: nil,
+  	... // 19 identical fields
+  }
 ```
 
 5. 刪除 Pod `nginx`。
 
 ```bash
-$ kubectl delete po nginx --grace-period 0
-pod "nginx" deleted
+$ kubectl delete pod my-first-pod --grace-period 0
+pod "my-first-pod " deleted
 ```
 
 6. 驗證 Pod 是否部署
 
 ```bash
 $ kubectl apply -f ./my-first-pod.yaml
-pod/nginx created
+pod/my-first-pod created
 
-$ kubectl get po nginx -o wide
+$ kubectl get pod my-first-pod -o wide
 NAME    READY   STATUS      RESTARTS   AGE   IP       NODE                                               NOMINATED NODE   READINESS GATES
 nginx   0/1     Running   0          17s   <none>   ip-10-66-148-166.ap-southeast-1.compute.internal   <none>           <none>
 ```
@@ -112,6 +112,10 @@ spec:
     image: nginx:1.14.2
     ports:
     - containerPort: 80
+  - name: ubuntu-container --> 請完成以下 ... 部分
+    ...
+    ...
+    ...
 ```
 
 ## References
