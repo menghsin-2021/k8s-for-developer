@@ -6,12 +6,6 @@
 $ kubectl apply -k ./
 ```
 
-
-
-
-
-
-
 ## Ref
 
 - https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/
