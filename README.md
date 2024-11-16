@@ -7,7 +7,11 @@
 
 ![](./img/01-user-login.png)
 
-2. 登入後預設 region 可能不同，請選擇東京 ap-northeast-1。
+2. 登入後預設 region 可能不同，請依據 user-n 選擇對應 region。
+
+- user-1 ~ user-8：ap-northeast-1
+- user-9 ~ user-16：ap-northeast-2
+- user-17 ~ user-24：ap-northeast-3
 
 ![](./img/02-region.png)
 
