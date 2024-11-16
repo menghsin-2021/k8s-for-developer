@@ -71,4 +71,3 @@ sh-4.2$ curl localhost:31282
 - Demo apply 一個 Ingress 對應回 AWS LB 大概會長怎樣
 - Demo apply 一個 Ingress 對應回 Ingress NGINX Controller 發生什麼事
 
-<!-- TODO:  demo steps IngressClass -->
