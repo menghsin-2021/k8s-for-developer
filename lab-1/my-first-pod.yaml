@@ -9,5 +9,5 @@ spec:
     ports:
     - containerPort: 80
   - name: ubuntu-container
-    image: ubuntu:24.042
+    image: ubuntu:24.04
     command: ["/bin/sh", "-c", "sleep 3600"]
