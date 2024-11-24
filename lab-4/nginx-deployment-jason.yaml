@@ -24,7 +24,19 @@ spec:
         - name: nginx-conf
           mountPath: /etc/nginx/conf.d
           readOnly: true
+        env:
+        - name: SECRET_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: nginx-secret
+              key: backend-username
       volumes:
       - name: nginx-conf
         configMap:
+          # 參考 configmap 名稱
           name: nginx-conf
+          items:
+          # config map 當中的 key
+          - key: default.conf
+          # 要建立的檔案名稱
+            path: default.conf

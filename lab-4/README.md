@@ -17,7 +17,8 @@ configmap/nginx-conf created
 ```
 
 3. 檢視 Nginx 是否生效，為什麼？
-
+	1. pod 要重新建立
+	2. containerport 也需要改成 8080
 ## Secret
 
 1. 使用 kubectl 命令建立 secret `backend-user`。
